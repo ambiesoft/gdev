@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="Y:\src"
+			IntermediateDirectory="$(ConfigurationName)D"
 			ConfigurationType="1"
 			CharacterSet="1"
 			>
@@ -41,12 +41,12 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;G:\wxWidgets-3.1.0\include&quot;;G:\wxWidgets-3.1.0\lib\vc9_lib\mswud"
+				AdditionalIncludeDirectories="&quot;G:\wxWidgets-3.1.0\include&quot;;&quot;G:\wxWidgets-3.1.0\lib\vc9_lib\mswud&quot;;../../lsMisc;../../lsMisc/stlsoft/include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -92,7 +92,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="Y:\src"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
@@ -121,7 +121,7 @@
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -177,24 +177,24 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\app.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Config.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\frame.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\gdev.cpp"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="2"
-					/>
-				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Helper.cpp"
+				>
 			</File>
 			<File
 				RelativePath=".\stdafx.cpp"
@@ -222,6 +222,22 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\app.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Config.h"
+				>
+			</File>
+			<File
+				RelativePath=".\frame.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Helper.h"
+				>
+			</File>
 			<File
 				RelativePath=".\stdafx.h"
 				>
