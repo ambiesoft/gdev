@@ -6,6 +6,8 @@ class GdevFrame: public wxFrame
 {
 public:
 	GdevFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
+	~GdevFrame();
+
 private:
 	void OnHello(wxCommandEvent& event);
 	void OnExit(wxCommandEvent& event);
@@ -14,6 +16,9 @@ private:
 	
 public:
 	void updateTitle();
+
+private:
+	wxAuiManager m_auiManager;
 
 	wxDECLARE_EVENT_TABLE();
 };

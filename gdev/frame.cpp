@@ -23,6 +23,15 @@ wxEND_EVENT_TABLE()
 GdevFrame::GdevFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
+	m_auiManager.SetManagedWindow(this);
+
+	        
+	wxTextCtrl* text1 = new wxTextCtrl(this, -1, _("Pane 1 - sample text"),
+    wxDefaultPosition, wxSize(200,150),
+    wxNO_BORDER | wxTE_MULTILINE);
+	m_auiManager.AddPane(text1, wxLEFT, wxT("Pane Number One"));
+
+
 	wxMenu *menuFile = new wxMenu;
 	menuFile->Append(ID_Hello, "&Hello...\tCtrl-H",
 		"Help string shown in status bar for this menu item");
@@ -50,6 +59,12 @@ GdevFrame::GdevFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 	CreateStatusBar();
 	
 	SetStatusText( "Welcome to wxWidgets!" );
+
+	m_auiManager.Update();
+}
+GdevFrame::~GdevFrame()
+{
+	m_auiManager.UnInit();
 }
 
 void GdevFrame::OnExit(wxCommandEvent& event)

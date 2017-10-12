@@ -13,6 +13,6 @@
 #include <wx/filename.h>
 #include <wx/stdpaths.h>
 #include <wx/wfstream.h>
-
+#include <wx/aui/aui.h>
 
 #define APPNAME "gdev"
