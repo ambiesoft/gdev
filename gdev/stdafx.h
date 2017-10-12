@@ -14,5 +14,8 @@
 #include <wx/stdpaths.h>
 #include <wx/wfstream.h>
 #include <wx/aui/aui.h>
+#include <wx/treectrl.h>
+#include <wx/artprov.h>
+
 
 #define APPNAME "gdev"

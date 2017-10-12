@@ -13,3 +13,14 @@ wxString Helper::GetIniFile()
 	fn.Assign(volume,path,name,"ini",true);
 	return fn.GetFullPath();
 }
+
+wxString Helper::GetAppDir()
+{
+	wxString fullpath, volume, path, name, ext;
+	wxFileName::SplitPath(wxStandardPaths::Get().GetExecutablePath(),
+		&volume,&path,&name,&ext);
+
+	wxFileName fn;
+	fn.Assign(volume,path,name,wxString(),false);
+	return fn.GetFullPath();
+}

@@ -8,7 +8,7 @@
 
 bool GdevApp::OnInit()
 {
-	if(!Config::Load())
+	if(!theConfig.Load())
 	{
 		Helper::Alert("Load failed.");
 	}
@@ -21,7 +21,7 @@ bool GdevApp::OnInit()
 
 int GdevApp::OnExit()
 {
-	if(!Config::Save())
+	if(!theConfig.Save())
 	{
 		Helper::Alert("Save failed.");
 	}

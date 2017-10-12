@@ -2,8 +2,7 @@
 #include "Config.h"
 #include "Helper.h"
 
-wxString Config::outdir_;
-wxString Config::gdevroot_;
+
 
 #define KEY_OUTDIR	"KEY_OUTDIR"
 
@@ -25,8 +24,8 @@ bool Config::LoadSave(const bool bLoad)
 {
 	// in which case, load first
 	wxString inifile = Helper::GetIniFile();
-	wxFileConfig* pConfig=NULL;
-	freer<wxFileConfig> ftt(&pConfig);
+	wxFileConfig* pwxConfig=NULL;
+	freer<wxFileConfig> ftt(&pwxConfig);
 	
 	bool failed = false;
 	if(wxFile::Exists(inifile))
@@ -35,11 +34,11 @@ bool Config::LoadSave(const bool bLoad)
 		if(!isRead.Ok())
 			return false;
 
-		pConfig = new wxFileConfig(isRead);
+		pwxConfig = new wxFileConfig(isRead);
 		
 		if(bLoad)
 		{
-			failed |= !pConfig->Read(KEY_OUTDIR, &outdir_);
+			failed |= !pwxConfig->Read(KEY_OUTDIR, &outdir_);
 			return !failed;
 		}
 	}
@@ -50,8 +49,8 @@ bool Config::LoadSave(const bool bLoad)
 			return true;
 	}
 
-	if(pConfig==NULL)
-		pConfig=new wxFileConfig();
+	if(pwxConfig==NULL)
+		pwxConfig=new wxFileConfig();
 
 
 	// save phase
@@ -65,9 +64,9 @@ bool Config::LoadSave(const bool bLoad)
 	if(!fsWrite.Ok())
 		return false;
 
-	failed |= !pConfig->Write(KEY_OUTDIR, outdir_);
+	failed |= !pwxConfig->Write(KEY_OUTDIR, outdir_);
 	
-	failed |= !pConfig->Save(fsWrite);
+	failed |= !pwxConfig->Save(fsWrite);
 	fsWrite.Close();
 	
 	return !failed;
@@ -82,4 +81,13 @@ bool Config::Load()
 bool Config::Save()
 {
 	return LoadSave(false);
+}
+
+wxString Config::GetGdevrootRT()  const
+{
+	if(gdevroot_.IsEmpty())
+	{
+		return Helper::GetAppDir();
+	}
+	return gdevroot_;
 }

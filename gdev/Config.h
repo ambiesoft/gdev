@@ -6,28 +6,39 @@ class Config
 	~Config(void){}
 
 private:
-	static wxString outdir_;
-	static wxString gdevroot_;
 
-	static bool LoadSave(const bool bLoad);
+	wxString gdevroot_;
+	wxString outdir_;
+
+
+	bool LoadSave(const bool bLoad);
 public:
-	static wxString GetOutdir()
+	static Config& GetInstance()
+	{
+		static Config conf;
+		return conf;
+	}
+	wxString GetOutdir() const
 	{
 		return outdir_;
 	}
-	static void SetOutdir(const wxString& value)
+	void SetOutdir(const wxString& value)
 	{
 		outdir_=value;
 	}
 
-	static wxString GetGdevroot() 
+	wxString GetGdevroot() const
 	{
 		return gdevroot_;
 	}
-	static void SetGdevroot(const wxString& value)
+	void SetGdevroot(const wxString& value)
 	{
 		gdevroot_=value;
 	}
-	static bool Load();
-	static bool Save();
+	wxString GetGdevrootRT() const;
+
+	bool Load();
+	bool Save();
 };
+
+#define theConfig (Config::GetInstance())

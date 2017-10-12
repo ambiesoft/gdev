@@ -7,6 +7,7 @@ class Helper
 
 public:
 	static wxString GetIniFile();
+	static wxString GetAppDir();
 	static void Alert(const wxString& message)
 	{
 		wxMessageBox(message,
