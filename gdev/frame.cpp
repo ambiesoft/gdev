@@ -20,6 +20,12 @@ GdevFrame::~GdevFrame()
 	m_auiManager.UnInit();
 }
 
+void GdevFrame::AddLog(const wxString& message)
+{
+	m_logWindow->AppendText(message);
+	m_logWindow->AppendText("\n");
+}
+
 void GdevFrame::OnExit(wxCommandEvent& event)
 {
 	Close(true);

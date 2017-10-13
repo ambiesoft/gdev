@@ -32,7 +32,20 @@ GdevFrame::GdevFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 		Name(wxT("test8")).Caption(wxT("Tree Pane")).Left().Layer(1).Position(1).CloseButton(true).MaximizeButton(true)
 		);
 
-	
+	m_logWindow = new wxTextCtrl(
+		this,
+		-1,
+		_(""),
+		wxDefaultPosition,
+		wxSize(10,80),
+		wxTE_MULTILINE|wxTE_READONLY);
+
+
+
+	m_auiManager.AddPane(
+		m_logWindow,
+		wxBOTTOM,
+		_("Log"));
 
 	wxMenu *menuFile = new wxMenu;
 	menuFile->Append(

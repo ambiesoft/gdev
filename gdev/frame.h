@@ -23,9 +23,11 @@ private:
 	void OnOutdir(wxCommandEvent& event);
 	
 	wxTreeCtrl* CreateTreeCtrl();
+	wxTextCtrl* m_logWindow;
 
 public:
 	void updateTitle();
+	void AddLog(const wxString& message);
 
 private:
 	wxAuiManager m_auiManager;

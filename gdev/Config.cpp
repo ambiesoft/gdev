@@ -85,9 +85,11 @@ bool Config::Save()
 
 wxString Config::GetGdevrootRT()  const
 {
-	if(gdevroot_.IsEmpty())
-	{
-		return Helper::GetAppDir();
-	}
-	return gdevroot_;
+	if(!gdevrootRT_.IsEmpty())
+		return gdevrootRT_;
+
+	if(!gdevroot_.IsEmpty())
+		return gdevroot_;
+	
+	return Helper::GetAppDir();
 }

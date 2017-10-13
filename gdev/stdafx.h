@@ -16,6 +16,6 @@
 #include <wx/aui/aui.h>
 #include <wx/treectrl.h>
 #include <wx/artprov.h>
-
+#include <wx/cmdline.h>
 
 #define APPNAME "gdev"

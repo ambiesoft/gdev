@@ -8,6 +8,7 @@ class Config
 private:
 
 	wxString gdevroot_;
+	wxString gdevrootRT_;
 	wxString outdir_;
 
 
@@ -36,7 +37,10 @@ public:
 		gdevroot_=value;
 	}
 	wxString GetGdevrootRT() const;
-
+	void SetGdevrootRT(const wxString& value)
+	{
+		gdevrootRT_=value;
+	}
 	bool Load();
 	bool Save();
 };
