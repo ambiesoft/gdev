@@ -47,9 +47,21 @@ GdevFrame::GdevFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 		wxBOTTOM,
 		_("Log"));
 
+	CreateMenu();
+
+	CreateStatusBar();
+	SetStatusText(_("Ready"));
+
+
+	m_auiManager.Update();
+}
+
+bool GdevFrame::CreateMenu()
+{
+
 	wxMenu *menuFile = new wxMenu;
 	menuFile->Append(
-		ID_Hello, 
+		ID_Hello,
 		"&Hello...\tCtrl-H",
 		"Help string shown in status bar for this menu item");
 	menuFile->AppendSeparator();
@@ -62,8 +74,6 @@ GdevFrame::GdevFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 		"&depottools...",
 		"Install depottools");
 
-
-
 	wxMenu *menuOption = new wxMenu;
 	menuOption->Append(
 		ID_Outdir,
@@ -75,22 +85,15 @@ GdevFrame::GdevFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 
 
 	wxMenuBar *menuBar = new wxMenuBar;
-	menuBar->Append(menuFile, "&File" );
+	menuBar->Append(menuFile, "&File");
 	menuBar->Append(menuInstall, "&Install");
-	menuBar->Append(menuOption,"&Option");
-	menuBar->Append(menuHelp, "&Help" );
-	
+	menuBar->Append(menuOption, "&Option");
+	menuBar->Append(menuHelp, "&Help");
+
 
 	SetMenuBar(menuBar);
-
-
-	CreateStatusBar();
-	SetStatusText(_("Ready"));
-
-
-	m_auiManager.Update();
+	return true;
 }
-
 wxTreeCtrl* GdevFrame::CreateTreeCtrl()
 {
     wxTreeCtrl* tree = new wxTreeCtrl(this, wxID_ANY,

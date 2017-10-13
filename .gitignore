@@ -1,4 +1,8 @@
 Debug/
 *.ncb
 *.suo
+*.user
+.vs/
+Release/
+gdev/Release/
 

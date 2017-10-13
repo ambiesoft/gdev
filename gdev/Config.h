@@ -2,7 +2,10 @@
 
 class Config
 {
-	Config(void){}
+	Config(void)
+	{
+		isLoaded_ = false;
+	}
 	~Config(void){}
 
 private:
@@ -11,7 +14,7 @@ private:
 	wxString gdevrootRT_;
 	wxString outdir_;
 
-
+	bool isLoaded_;
 	bool LoadSave(const bool bLoad);
 public:
 	static Config& GetInstance()
@@ -43,6 +46,11 @@ public:
 	}
 	bool Load();
 	bool Save();
+
+	bool IsLoaded() const
+	{
+		return isLoaded_;
+	}
 };
 
 #define theConfig (Config::GetInstance())

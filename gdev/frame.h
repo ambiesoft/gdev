@@ -24,6 +24,7 @@ private:
 	
 	wxTreeCtrl* CreateTreeCtrl();
 	wxTextCtrl* m_logWindow;
+	bool CreateMenu();
 
 public:
 	void updateTitle();

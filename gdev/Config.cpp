@@ -75,6 +75,7 @@ bool Config::LoadSave(const bool bLoad)
 
 bool Config::Load()
 {
+	isLoaded_ = true;
 	return LoadSave(true);
 }
 

@@ -8,38 +8,31 @@
 
 bool GdevApp::OnInit()
 {
-	if(!wxApp::OnInit())
-		return false;
-
-	if(!theConfig.Load())
+	if (!theConfig.Load())
 	{
 		Helper::Alert("Load failed.");
 	}
 
-	GdevFrame *frame = new GdevFrame(APPNAME, wxPoint(50, 50), wxSize(450, 340) );
+	if(!wxApp::OnInit())
+		return false;
+
+
+
+	GdevFrame *frame = new GdevFrame(APPNAME, wxDefaultPosition, wxSize(800,640));
 	frame->Show( true );
 	frame->updateTitle();
 
+	// log gdev root
 	frame->AddLog(_("gdev root = \"" + theConfig.GetGdevrootRT() +"\""));
-	//if(!.IsEmpty())
-	//	frame->AddLog(theConfig.GetGdevroot());
-	//else
-	//{
-	//	frame->AddLog(wxString::Format(_("--gdev-root not specified. Using current directory (%s) as gdevroot."),
-	//		theConfig.GetGdevrootRT()));
-	//}
 
-	frame->AddLog(_("Finding depottools..."));
+	// log depot_tools
 	wxFileName depotDir = wxFileName::DirName(theConfig.GetGdevrootRT());
-	depotDir.AppendDir("depottools");
-	if(depotDir.DirExists())
-	{
-		frame->AddLog(wxString::Format(_("depottolls found (%s)."), depotDir.FileName));
-	}
-	else
-	{
-		frame->AddLog(_("depottools not found."));
-	}
+	depotDir.AppendDir("depot_tools");
+
+	frame->AddLog(wxString::Format(_("depot_tolls = \"%s\"%s"), depotDir.GetFullPath(),
+		(depotDir.DirExists() ? "" : " " + _("(not fould)"))));
+
+
 	return true;
 }
 
@@ -69,8 +62,7 @@ void GdevApp::OnInitCmdLine(wxCmdLineParser& parser)
 
 bool GdevApp::OnCmdLineParsed(wxCmdLineParser& parser)
 {
-	// first load config and overwrite with commnad line.
-	theConfig.Load();
+	wxASSERT(theConfig.IsLoaded());
 
 	wxString value;
 	parser.Found("gdev-root", &value);
