@@ -11,7 +11,10 @@ class Config
 private:
 
 	wxString gdevroot_;
+
+	// specified by command line, not save to ini
 	wxString gdevrootRT_;
+
 	wxString outdir_;
 
 	bool isLoaded_;

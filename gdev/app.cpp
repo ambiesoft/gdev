@@ -22,16 +22,53 @@ bool GdevApp::OnInit()
 	frame->Show( true );
 	frame->updateTitle();
 
+
+	const wxString gdevroot = theConfig.GetGdevrootRT();
 	// log gdev root
-	frame->AddLog(_("gdev root = \"" + theConfig.GetGdevrootRT() +"\""));
+	frame->AddLog(_("gdev root = \"" + gdevroot +"\""));
 
 	// log depot_tools
-	wxFileName depotDir = wxFileName::DirName(theConfig.GetGdevrootRT());
+	wxFileName depotDir = wxFileName::DirName(gdevroot);
 	depotDir.AppendDir("depot_tools");
 
-	frame->AddLog(wxString::Format(_("depot_tolls = \"%s\"%s"), depotDir.GetFullPath(),
+	frame->AddLog(wxString::Format(_("depot_tools = \"%s\"%s"), 
+		depotDir.GetFullPath(),
 		(depotDir.DirExists() ? "" : " " + _("(not fould)"))));
 
+
+
+	wxString strT = _("Is depot_tools in PATH?");
+	bool isDepotInPath = false;
+	wxPathList pathList;
+	pathList.AddEnvList(wxT("PATH"));
+	if (wxNOT_FOUND != pathList.Index(depotDir.GetFullPath(), wxFileName::IsCaseSensitive()))
+	{
+		isDepotInPath = true;
+	}
+
+
+	frame->AddLog(wxString::Format(_("Is depot_tools in PATH?%s"),
+		isDepotInPath ? " (Yes)" : " (No)"));
+	if (!isDepotInPath)
+	{
+		wxString current;
+		wxCHECK(wxGetEnv(wxT("PATH"), &current), true);
+		wxASSERT(!current.IsEmpty());
+
+		current = Helper::QuotePath(Helper::RemoveTrailingSeparator(depotDir.GetFullPath())) + wxPATH_SEP + current;
+		wxCHECK(wxSetEnv(wxT("PATH"), current), true);
+		frame->AddLog(_("-- depot_tools has been added to PATH"));
+	}
+	
+	wxString value;
+	bool isdefined = wxGetEnv(wxT("DEPOT_TOOLS_WIN_TOOLCHAIN"), &value);
+	frame->AddLog(wxString::Format(_("Is DEPOT_TOOLS_WIN_TOOLCHAIN defined?%s"),
+		 isdefined ? " (Yes)" : " (No)"));
+	if (!isdefined)
+	{
+		wxCHECK(wxSetEnv(wxT("DEPOT_TOOLS_WIN_TOOLCHAIN"), "0"), true);
+		frame->AddLog(_("-- DEPOT_TOOLS_WIN_TOOLCHAIN has been set to 0"));
+	}
 
 	return true;
 }

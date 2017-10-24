@@ -37,7 +37,7 @@ GdevFrame::GdevFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 		-1,
 		_(""),
 		wxDefaultPosition,
-		wxSize(10,80),
+		wxSize(10,120),
 		wxTE_MULTILINE|wxTE_READONLY);
 
 

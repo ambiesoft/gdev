@@ -8,14 +8,16 @@
 #endif
 
 #include <wx/setup.h>
-#include <wx/stdpaths.h>
+
+#include <wx/artprov.h>
+#include <wx/aui/aui.h>
+#include <wx/cmdline.h>
+#include <wx/dir.h>
 #include <wx/fileconf.h>
 #include <wx/filename.h>
 #include <wx/stdpaths.h>
-#include <wx/wfstream.h>
-#include <wx/aui/aui.h>
 #include <wx/treectrl.h>
-#include <wx/artprov.h>
-#include <wx/cmdline.h>
+#include <wx/wfstream.h>
+
 
 #define APPNAME "gdev"
