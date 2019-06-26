@@ -5,6 +5,60 @@
 #include "config.h"
 #include "helper.h"
 
+wxString GdevApp::FindGNRoot()
+{
+	wxString strOutDir = GetOutDir();
+	if (strOutDir.IsEmpty())
+		return wxString();
+
+	if (!wxDirExists(strOutDir))
+		return wxString();
+
+	wxString testDir = strOutDir;
+	if (testDir.Last() != L'/' || testDir.Last() != L'\\')
+		testDir += '/';
+	do
+	{
+		if (wxFileExists(testDir + ".gn"))
+			return testDir;
+
+		wxFileName t(testDir);
+		t.MakeAbsolute();
+		t.AppendDir("..");
+		t.Normalize();
+		if (testDir == t.GetFullPath())
+			break;
+		testDir = t.GetFullPath();
+	} while (true);
+
+	return wxString();
+}
+
+wxString GdevApp::GetOutDir()
+{
+	wxString ret = theConfig.GetOutdir();
+	if(!ret.IsEmpty() && wxDirExists(ret))
+		return ret;
+
+	if (!SetOutDir(nullptr))
+	{
+		return wxString();
+	}
+	return theConfig.GetOutdir();
+}
+
+bool GdevApp::SetOutDir(wxFrame* pParent)
+{
+	wxTextEntryDialog dlg(pParent,
+		"Outdir",
+		"Enter Outdir",
+		theConfig.GetOutdir());
+	if (wxID_OK != dlg.ShowModal())
+		return false;
+
+	theConfig.SetOutdir(dlg.GetValue());
+	return true;
+}
 
 bool GdevApp::OnInit()
 {
@@ -17,13 +71,23 @@ bool GdevApp::OnInit()
 		return false;
 
 
-
+	
 	GdevFrame *frame = new GdevFrame(APPNAME, wxDefaultPosition, wxSize(800,640));
 	frame->Show( true );
 	frame->updateTitle();
 
+	// Get OutDir
+	wxString strOutDir = GetOutDir();
+	wxASSERT(!strOutDir.IsEmpty());
+	frame->AddLog(_("outdir = \"" + strOutDir + "\""));
 
-	const wxString gdevroot = theConfig.GetGdevrootRT();
+	// Find .gn
+	wxString gdevroot = theConfig.GetGdevrootRT();
+	if (gdevroot.IsEmpty())
+	{
+		gdevroot = FindGNRoot();
+	}
+
 	// log gdev root
 	frame->AddLog(_("gdev root = \"" + gdevroot +"\""));
 

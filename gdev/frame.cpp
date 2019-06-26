@@ -32,8 +32,10 @@ void GdevFrame::OnExit(wxCommandEvent& event)
 }
 void GdevFrame::OnAbout(wxCommandEvent& event)
 {
-	wxMessageBox( "This is a wxWidgets' Hello world sample",
-		"About Hello World", wxOK | wxICON_INFORMATION );
+	wxMessageBox( 
+		theApp->GetAppName() + " " + "v1.0.1",
+		theApp->GetAppName(),
+		wxOK | wxICON_INFORMATION );
 }
 void GdevFrame::OnHello(wxCommandEvent& event)
 {
@@ -46,14 +48,7 @@ void GdevFrame::OnInstallDepottools(wxCommandEvent& event)
 
 void GdevFrame::OnOutdir(wxCommandEvent& event)
 {
-	wxTextEntryDialog dlg(this,
-		"Outdir",
-		"Enter Outdir",
-		theConfig.GetOutdir());
-	if(wxID_OK != dlg.ShowModal())
-		return;
-
-	theConfig.SetOutdir(dlg.GetValue());
+	theApp->SetOutDir(this);
 
 	updateTitle();
 }

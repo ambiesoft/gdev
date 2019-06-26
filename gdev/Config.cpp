@@ -92,5 +92,5 @@ wxString Config::GetGdevrootRT()  const
 	if(!gdevroot_.IsEmpty())
 		return gdevroot_;
 	
-	return Helper::GetAppDir();
+	return wxString();
 }

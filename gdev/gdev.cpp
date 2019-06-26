@@ -2,4 +2,6 @@
 
 #include "app.h"
 
+
 wxIMPLEMENT_APP(GdevApp);
+

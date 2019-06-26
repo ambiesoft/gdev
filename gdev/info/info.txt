@@ -1,0 +1,24 @@
+
+1.Change directory to %WXWIN%\build\msw and type
+ > nmake /f makefile.vc
+
+
+to build wxWidgets in the default debug configuration as a static library. You can also do
+ > nmake /f makefile.vc BUILD=release
+
+
+to build a release version or
+ > nmake /f makefile.vc BUILD=release SHARED=1
+
+
+to build a release DLL version. Finally, you can also add "TARGET_CPU=X64" to nmake command line to build Win64 versions (this only works if you are using a 64 bit compiler, of course).
+
+See "Configuring the Build" for more information about the additional parameters that can be specified on the command line.
+
+
+2.To verify your build, change the directory to %WXWIN%\samples\minimal and run the same nmake command (with the same parameters there), this should create a working minimal wxWidgets sample.
+
+
+3.If you need to rebuild, use "clean" target first or "nmake /a".
+
+•From the IDE using the provided project files:
